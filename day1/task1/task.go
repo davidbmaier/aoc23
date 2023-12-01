@@ -14,7 +14,7 @@ func check(e error) {
 }
 
 func main() {
-	data, err := os.ReadFile("./data1.txt")
+	data, err := os.ReadFile("./data.txt")
 	check(err)
 	inputs := string(data)
 	lines := strings.Split(inputs, "\n")
