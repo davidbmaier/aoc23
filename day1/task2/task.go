@@ -19,6 +19,7 @@ func main() {
 	inputs := string(data)
 	lines := strings.Split(inputs, "\n")
 
+	// map for all strings that we'll be looking for (along with their associated int value)
 	stringMap := map[string]int{
 		"1":     1,
 		"2":     2,
@@ -44,18 +45,22 @@ func main() {
 	for i := 0; i < len(lines); i++ {
 		line := lines[i]
 
+		// initialize lowest and highest index values (with their minimum possible values)
 		lowestIndex := len(line) - 1
 		highestIndex := 0
-		var lowestValue, highestValue int
+		var lowestValue, highestValue int // declare lowest and highest values for separate tracking
 
+		// go through all strings we're looking for
 		for stringKey, stringValue := range stringMap {
-			firstIndex := strings.Index(line, stringKey)
-			lastIndex := strings.LastIndex(line, stringKey)
+			firstIndex := strings.Index(line, stringKey)    // index of the first occurrence
+			lastIndex := strings.LastIndex(line, stringKey) // index of the last occurrence
 
+			// bail out if the string isn't contained at all
 			if firstIndex == -1 {
 				continue
 			}
 
+			// update lowest and highest index/value variables if necessary
 			if firstIndex <= lowestIndex {
 				lowestIndex = firstIndex
 				lowestValue = stringValue
@@ -71,6 +76,7 @@ func main() {
 		lineValues = append(lineValues, lineValue)
 	}
 
+	// add up all the lines' values
 	sumOfLines := 0
 	for i := 0; i < len(lineValues); i++ {
 		intValue, err := strconv.Atoi(lineValues[i])
